@@ -21,7 +21,6 @@
 module.exports = {
 	PrivilegeLevel: {
 		Guest: 1,
-		Device: 2,
-		Admin: 3
+		User: 2
 	}
 }

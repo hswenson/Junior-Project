@@ -11,8 +11,8 @@
 
         "dbs": [
             {
-                "dbname": "iot_test",
-                "name": "iot",
+                "dbname": "jp_test",
+                "name": "jp",
                 "options": {},
                 "members": [
                     { "host": "localhost", "port": 27017 }
