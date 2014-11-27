@@ -17,8 +17,8 @@
         },
         "dbs": [
             {
-                "dbname": "iot",
-                "name": "iot",
+                "dbname": "jp",
+                "name": "jp",
                 "options": {
                     "db": {
                         "readPreference": "secondaryPreferred"
