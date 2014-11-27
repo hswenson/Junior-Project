@@ -1,0 +1,23 @@
+{
+	"mongo": {
+	    "options": {
+            "server": {
+                "auto_reconnect": true,
+                "socketOptions": {
+                    "keepAlive": 60
+                }
+            }
+        },
+
+        "dbs": [
+            {
+                "dbname": "iot_test",
+                "name": "iot",
+                "options": {},
+                "members": [
+                    { "host": "localhost", "port": 27017 }
+                ]
+            }
+        ]
+    }
+}

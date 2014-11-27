@@ -1,0 +1,47 @@
+{
+    "app": {
+        "host": "localhost",
+        "ports": [
+            { "port": 6789 }
+        ]
+    },
+
+	"mongo": {
+	    "options": {
+            "server": {
+                "auto_reconnect": true,
+                "socketOptions": {
+                    "keepAlive": 60
+                }
+            }
+        },
+        "dbs": [
+            {
+                "dbname": "iot",
+                "name": "iot",
+                "options": {
+                    "db": {
+                        "readPreference": "secondaryPreferred"
+                    }
+                },
+                "members": [
+                    { "host": "dev.iotdb.swensonhe.com", "port": 25017 },
+                    { "host": "dev.iotdb.swensonhe.com", "port": 25018 },
+                    { "host": "dev.iotdb.swensonhe.com", "port": 25000 }
+                ]
+            }
+        ]
+    },
+
+    "mqtt": {
+        "host": "104.131.109.30",
+        "port": 1883
+    },
+
+    "mosca": {
+        "verbose": true,
+        "host": "localhost",
+        "port": 1883,
+        "backend": "redis://dev.iotredis.swensonhe.com:6379"
+    } 
+}

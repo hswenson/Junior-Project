@@ -1,0 +1,13 @@
+{
+    "laxcomma": true,
+    "node": true,
+    "strict": false,
+    "asi": true,
+    "indent": 2,
+    "eqnull": true,
+    "lastsemic": true,
+    "unused": false,
+    "laxbreak": true,
+    "sub": true,
+    "quotmark": false
+}
