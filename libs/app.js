@@ -13,9 +13,6 @@ var async = require('async')
   , extend = require('extend')
   , path = require('path')
   , http = require('http')
-  , https = require('https')
-  , routes = require('./routes')
-  , util = require('./util.js')('app')
   , defaultConfig = require('../config')
   , Api = require('./api')
   , routes = require('./routes');
@@ -28,7 +25,7 @@ var async = require('async')
 var App = express();
 
 /** Add properties for convenience **/
-App.util = util;
+App.console = console;
 App.Api = Api;
 App.servers = [];
 App.apiApp = express();
@@ -58,7 +55,7 @@ App.startServers = function (config) {
 		me.use(express.compress());
 	    me.use(express.methodOverride());
 	    me.use(express.bodyParser({
-	        uploadDir: path.join(__dirname, '../tmp/uploads'),
+	        uploadDir: path.join(__dirname, '../images'),
 	        keepExtensions: true
 	    }));
 	    me.use(express.cookieParser());
@@ -66,6 +63,8 @@ App.startServers = function (config) {
 	        dumpExceptions: true,
 	        showStack: true
 	    }));
+	    me.use('/i', express.static(path.join(__dirname, '../images')));
+	    me.use('/', express.static(path.join(__dirname, '../static')));
 	    me.use(me.router);
 	    me.use(me.config().app.api.prefix, App.apiApp)
 	});
@@ -73,21 +72,14 @@ App.startServers = function (config) {
 
 	// start http servers
 	me.get('ports').forEach(function (p) {
-		if (p.secure) {
-			me.servers.push(https.createServer(me).listen(p.port, function () {
-			    util.log('+ simplehuman iot started via https ' +
-			    	'protocol on port %d ', p.port);
-			}))
-		} else {
-			me.servers.push(http.createServer(me).listen(p.port, function () {
-			    util.log(' + simplehuman iot started via http ' +
-			    	'protocol on port %d ', p.port);
-			}))
-		}
+		me.servers.push(http.createServer(me).listen(p.port, function () {
+		    console.log(' + jp server started via http ' +
+		    	'protocol on port %d ', p.port);
+		}))
 	})
 
 	// register routes
-	util.log(' + Registering routes for application');
+	console.log(' + Registering routes for application');
 	routes.register(this);
 }
 
@@ -97,16 +89,16 @@ App.startServers = function (config) {
 App.stopServers = function (callback) {
 	var me = this;
 	if (!me.servers.length) {
-		util.log('No servers are running')
+		console.log('No servers are running')
 		return callback(null);
 	}
 
-	util.log('All servers are gracefully shutting down...')
+	console.log('All servers are gracefully shutting down...')
 	async.each(me.servers, function (s, cb) {
 		s.close(cb);
 	}, function (err) {
 		if (err) return callback(err);
-		util.log('should be killing process')
+		console.log('should be killing process')
 
 		me.servers = [];
 		callback(null);
@@ -115,7 +107,7 @@ App.stopServers = function (callback) {
 
 App.gracefulSuicide = function (callback) {
 	this.stopServers(function (err) {
-		util.log('Shutting down process...');
+		console.log('Shutting down process...');
 		process.exit(1);
 	})
 }

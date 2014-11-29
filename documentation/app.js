@@ -3,7 +3,7 @@
  *
  * Documentation app for handling swagger
  *
- * @author Nick Swenson
+ * @author Hannah Swenson
  */
 
 /**

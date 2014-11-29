@@ -106,8 +106,8 @@ userSchema.statics.getOrCreate = function (email, callback) {
 		// If no user, create by email
 		function (cb) {
 			if (user) return cb(null);
-
-			var user = User.make(email);
+			
+			user = User.make(email);
 			user.save(cb);
 		}
 	], function (err) {

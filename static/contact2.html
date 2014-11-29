@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+<head>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="keywords" content="HTML5 Template" />
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Blvck - Responsive Multipurpose Ecommerce Theme</title>
+
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<!-- Google Webfont -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Seaweed+Script' rel='stylesheet' type='text/css'>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="js/vendor/rsplugin/rs-plugin/css/settings.css" media="screen"/>
+	<link rel="stylesheet" href="js/vendor/fancyselect/fancySelect.css">
+	<link rel="stylesheet" href="js/vendor/owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" href="js/vendor/owl-carousel/owl.theme.css">
+	<link rel="stylesheet" href="js/vendor/owl-carousel/owl.transitions.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="js/vendor/remodal/jquery.remodal.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+     		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body id="contact2">
+
+<div class="body">
+
+	<!-- HEADER -->
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 logo">
+					<h1>
+						<span class="menu-trigger">
+						<em class="mt1"></em>
+						<em class="mt2"></em>
+						<em class="mt3"></em>
+						</span>
+						<a href="#">blvck Fashion</a>
+					</h1>
+				</div>
+				<div class="col-md-7">
+					<ul class="topbar">
+						<li><a href="./login.html">Login</a></li>
+						<li class="tb-favorites"><a href="#">Favorites</a></li>
+						<li class="tb-cart">
+							<a href="#">Cart</a>
+								<span class="cart-dropdown">
+									<a href='./cart.html'>Cart</a>
+									<a href='./checkout.html'>Checkout</a>
+								</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- NAVIGATION -->
+	<nav class="">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div id='cssmenu'>
+						<ul>
+							<li><a href='./shop.html'>Shop</a></li>
+							<li><a href='./shop_item.html'>Product</a></li>
+							<li><a href='./cart.html'>Cart</a></li>
+							<li><a href='./checkout.html'>Checkout</a></li>
+							<li><a href='./index_2.html'>News</a></li>
+							<li><a href='./index_3.html'>About</a></li>
+							<li class='active'>
+								<a href='#'>Contact</a>
+								<ul>
+									<li><a href='./contact1.html'>Contact - 1</a></li>
+									<li><a href='./contact2.html'>Contact - 2</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<form class="search">
+						<input type="search" placeholder="Enter text here...">
+						<button type="submit"></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- CONTACT CONTENT -->
+	<div class="contact-content contact-content2">
+		<div class="row">
+			<div class="col-md-6">
+				<!-- GOOGLE MAP -->
+				<div id="google-map">
+					<div class="map1">
+						<div class="gmap1">
+							<div id="map1"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 cform" id="cform">
+				<div class="col-md-11">
+					<div class="map-address2">
+						<h5>London HQ</h5>
+						<p>BLVCK Fashion House,<br>Oatland Rood<br>UK, LS71JR</p>
+					</div>
+					<form class="contact-form contact-form2" id="contactForm" action="php/contact.php" method="post">
+					<h4>Write Us</h4>
+					<div class="row">
+						<div class="col-md-6">
+							<input name="senderName" id="senderName" required="required" type="text" class="input-left" placeholder="Name">
+						</div>
+						<div class="col-md-6">
+							<input type="email" name="senderEmail" id="senderEmail" placeholder="Email" required="required" >
+						</div>
+					</div>
+					<textarea name="message" id="message" placeholder="Message"></textarea>
+					<div class="clearfix space40"></div>
+					<button class="btn2 btn-center" type="submit">Send</button>
+				</form>
+				<div id="successMessage" class="successmessage">
+					<p><span class="success-ico"></span> Thanks for sending your message! We'll get back to you shortly.</p>
+				</div>
+				<div id="failureMessage" class="errormessage">
+					<p><span class="error-ico"></span> There was a problem sending your message. Please try again.</p>
+				</div>
+				<div id="incompleteMessage" class="statusMessage">
+					<p>Please complete all the fields in the form before sending.</p>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<!-- FOOTER -->
+	<!-- FOOTER -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 footer-widget">
+					<h4>Contact</h4>
+					<div class="row">
+						<div class="col-md-6">
+							<span>
+								<em>London</em>
+								London HQ<br>
+								BLVCK Fashion House,<br>
+								Oatland Rood<br>
+								UK<br>
+								LS71JR
+							</span>
+						</div>
+						<div class="col-md-6">
+							<span>
+								<em>Customer Care</em>
+								T: &nbsp;&nbsp;784 12294 84<br>
+								F: &nbsp;&nbsp;784 122948 5<br>
+								E: &nbsp;&nbsp;costumer@blvckfashion.com
+							</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<span>
+								<em>Stores and Company</em>
+								T: &nbsp;&nbsp;784 12294 84<br>
+								F: &nbsp;&nbsp;784 122948 5<br>
+								E: &nbsp;&nbsp;costumer@blvckfashion.com<br>
+								<br>
+								Monday to Friday from 9.00 to 18.00
+							</span>
+						</div>
+						<div class="col-md-6">
+							<span>
+								<em>Logistics</em>
+								London<br>
+								BLVCK Fashion House,<br>
+								Oatland Rood<br>
+								UK<br>
+								LS71JR
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 footer-widget">
+					<h4>Location</h4>
+					<span>
+					London HQ<br>
+					BLVCK Fashion House,<br>
+					Oatland Rood<br>
+					UK<br>
+					LS71JR
+					</span>
+					<div class="footer-map">
+						<a href="https://goo.gl/maps/QCj8d" target="_blank">View on google maps</a>
+					</div>
+				</div>
+				<div class="col-md-3 footer-widget">
+					<h4>Help</h4>
+					<ul class="footer-links">
+						<li><a href="#">How to Buy</a></li>
+						<li><a href="#">FAQ's</a></li>
+						<li><a href="#">Payment</a></li>
+						<li><a href="#">Shipment</a></li>
+						<li><a href="#">Returns</a></li>
+						<li><a href="#">Exchange</a></li>
+						<li><a href="#">Technology</a></li>
+						<li><a href="#">GiftCard</a></li>
+					</ul>
+					<div class="clearfix"></div>
+					<div class="space70"></div>
+					<p class="copy">&copy;2014 BLVCK Fashion. All rights reserved</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vendor/fancyselect/fancySelect.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/vendor/isotope/jquery.isotope.min.js"></script>
+<script src="js/vendor/owl-carousel/owl.carousel.js"></script>
+<script src="js/vendor/rsplugin/rs-plugin/js/jquery.themepunch.tools.min.js"></script>   
+<script src="js/vendor/rsplugin/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script src="js/vendor/remodal/jquery.remodal.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/main.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+<script src="js/vendor/gmap/gmaps.js"></script> 
+<script src="js/vendor/gmap/plugin1.js"></script>
+<script src="js/contact.js"></script>
+
+</body>
+</html>

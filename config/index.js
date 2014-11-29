@@ -35,8 +35,6 @@ var config = (function () {
 module.exports = (function () {
     Error.stackTraceLimit = 20;
     if (process.env.HOST) config.app.host = process.env.HOST;
-    if (process.env.REDUCTION_FACTOR)
-        config.intervals.timeReductionFactor = process.env.REDUCTION_FACTOR;
 
     return config;
 })()

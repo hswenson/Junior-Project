@@ -19,29 +19,11 @@
             {
                 "dbname": "jp",
                 "name": "jp",
-                "options": {
-                    "db": {
-                        "readPreference": "secondaryPreferred"
-                    }
-                },
+                "options": {},
                 "members": [
-                    { "host": "dev.iotdb.swensonhe.com", "port": 25017 },
-                    { "host": "dev.iotdb.swensonhe.com", "port": 25018 },
-                    { "host": "dev.iotdb.swensonhe.com", "port": 25000 }
+                    { "host": "localhost", "port": 27017 }
                 ]
             }
         ]
-    },
-
-    "mqtt": {
-        "host": "104.131.109.30",
-        "port": 1883
-    },
-
-    "mosca": {
-        "verbose": true,
-        "host": "localhost",
-        "port": 1883,
-        "backend": "redis://dev.iotredis.swensonhe.com:6379"
-    } 
+    }
 }

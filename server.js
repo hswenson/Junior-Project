@@ -20,9 +20,6 @@ async.series([
 	/** Initialize App */
 	util.proxy(initialize.initApp, initialize),
 
-	/** Inject data into db */
-	util.proxy(initialize.injectData, initialize),
-
 	/** Initialize Server */
 	util.proxy(initialize.initServer, initialize)
 

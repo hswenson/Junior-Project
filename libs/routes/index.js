@@ -23,10 +23,7 @@
  */
 var Api = require('../api')
   , enums = require('../../common/enums')
-  , util = require('../util')('routes')
-  , config = require('../../config')
-  , Auth = require('../auth')
-  , mqtt = require('../mqtt');
+  , config = require('../../config');
 
 /**
  * Variables in use
@@ -53,28 +50,39 @@ Routes.prototype.register = function (app) {
 Routes.prototype.initRoutes = function () {
 	if (!this.app) throw new Error('Application has not be registered with routes layer.');
 
-	/** Health check routes **/
-	this.registerRoute({
-		fn: function (args, ret) { ret(null) },
-		path: '/v',
-		noApiPrefix: true,
-		skipAuth: true
-	})
+    this.registerRoute({
+        fn: function (args, ret, req, res) {
+                res.send('<form method="post" enctype="multipart/form-data">'
+                    + '<p>size (required): <input type="text" name="size" /></p>'
+                    + '<p>color (optional): <input type="text" name="color" /></p>'
+                    + '<p>shape (required): <input type="text" name="shape" /></p>'
+                    + '<p>length (required): <input type="text" name="length" /></p>'
+                    + '<p>email (required): <input type="text" name="email" /></p>'
+                    + '<p>name (required): <input type="text" name="name" /></p>'
+                    + '<p>dorm (required): <input type="text" name="dorm" /></p>'
+                    + '<p>phone (required): <input type="text" name="phone" /></p>'
+                    + '<p>description (required): <input type="text" name="description" /></p>'
+                    + '<p>file: <input type="file" name="file" /></p>'
+                    + '<p><input type="submit" value="Upload" /></p>'
+                    + '</form>');
+        },
+        path: '/dress/upload',
+		skipAuth: true,
+        methods: [ 'GET' ]
+    })
 
 	// Redirect to docs
 	this.registerRoute({
-		fn: function (args, ret, req, res) {
-			return res.redirect('/docs');
-		},
-		path: '/',
-		noApiPrefix: true,
+		fn: Api.dress.upload,
+		path: '/dress/upload',
+		methods: [ 'POST' ],
 		skipAuth: true
 	})
 
 	/** Guest Routes **/
 	this.registerRoute({
-		fn: Api.device.register,
-		path: '/device/register',
+		fn: Api.dress.filter,
+		path: '/dress/filter',
 		skipAuth: true
 	})
 }
@@ -108,7 +116,7 @@ Routes.prototype.registerRoute = function (route) {
 
 	var authMiddleware = !skipAuth ?
 							Auth.middleware(route.privilegeLevel) :
-							Auth.middleware(false);
+							function (req, res, next) { next(null) };
 
 	var wrappedFunction;
 	if (skipWrap) {
@@ -135,7 +143,7 @@ Routes.prototype.wrapper = function (fn) {
 	if (typeof fn != 'function') throw new Error('Please supply a function for the endpoint');
 
 	return function (req, res, next) {
-		if (!req.Context) throw new Error('Must supply a Context attached to the request to run function inside of');
+		if (!req.Context) req.Context = fn;
 		var args = me._queryConverter(req);
 		var Context = req.Context;
 
@@ -143,14 +151,14 @@ Routes.prototype.wrapper = function (fn) {
 		var start = Date.now();
 		fn.call(Context, args, function (err, result) {
 			var time = Date.now() - start;
-			util.debug(req.protocol.toUpperCase() + ':', req.path, time + 'ms')
+			console.debug(req.protocol.toUpperCase() + ' ' + req.method + ':', req.path, time + 'ms')
 
 			if (err && err.code) {
-				util.error(err.stack);
+				console.error(err.stack);
 				res.json(err.status || 500, { result: err.code });
 			} else if (err) {
 				err = new Error.Internal(err.message || err);
-				util.error(err.stack);
+				console.error(err.stack);
 				res.json(err.status || 500, { result: err.code });
 			} else {
 				res.json(result)

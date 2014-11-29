@@ -7,15 +7,8 @@
  */
 var async = require('async')
   , mongoose = require('mongoose')
-  , util = require('../libs/util')('modeldevice')
-  , enums = require('../common/enums.js')
-  , crypto = require('crypto')
+  , enums = require('../common/enums.js');
 
-
-/**
- * Variables in use
- */
-var PrivilegeLevel = enums.PrivilegeLevel;
 
 /**
  * Initialize
@@ -91,4 +84,4 @@ dressSchema.statics.filter = function(filterObj, limit, skip, sort, callback) {
  ******************************************************/
 
 
-module.exports = mongoose.JP.model('Dress', dressSchema);
+module.exports = mongoose.jp.model('Dress', dressSchema);

@@ -25,7 +25,6 @@
 var routes = require('../routes')
   , Context = require('../context')
   , enums = require('../../common/enums.js')
-  , util = require('../util')('auth')
   , config = require('../../config')
   , async = require('async')
   , models = require('../../models');
