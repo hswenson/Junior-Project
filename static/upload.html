@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Blvck - Responsive Multipurpose Ecommerce Theme</title>
+	<title>Hannah's Closet</title>
 
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,8 +42,7 @@
 	<![endif]-->
 
 </head>
-
-<body id="contact2">
+<body>
 
 <div class="body">
 
@@ -58,20 +57,12 @@
 						<em class="mt2"></em>
 						<em class="mt3"></em>
 						</span>
-						<a href="#">blvck Fashion</a>
+						<a href="./">Hannah's Closet</a>
 					</h1>
 				</div>
 				<div class="col-md-7">
 					<ul class="topbar">
-						<li><a href="./login.html">Login</a></li>
-						<li class="tb-favorites"><a href="#">Favorites</a></li>
-						<li class="tb-cart">
-							<a href="#">Cart</a>
-								<span class="cart-dropdown">
-									<a href='./cart.html'>Cart</a>
-									<a href='./checkout.html'>Checkout</a>
-								</span>
-						</li>
+						<li><a href="./">Home</a></li>
 					</ul>
 				</div>
 			</div>
@@ -84,21 +75,6 @@
 			<div class="row">
 				<div class="col-md-9">
 					<div id='cssmenu'>
-						<ul>
-							<li><a href='./shop.html'>Shop</a></li>
-							<li><a href='./shop_item.html'>Product</a></li>
-							<li><a href='./cart.html'>Cart</a></li>
-							<li><a href='./checkout.html'>Checkout</a></li>
-							<li><a href='./index_2.html'>News</a></li>
-							<li><a href='./index_3.html'>About</a></li>
-							<li class='active'>
-								<a href='#'>Contact</a>
-								<ul>
-									<li><a href='./contact1.html'>Contact - 1</a></li>
-									<li><a href='./contact2.html'>Contact - 2</a></li>
-								</ul>
-							</li>
-						</ul>
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -111,56 +87,31 @@
 		</div>
 	</nav>
 
-	<!-- CONTACT CONTENT -->
-	<div class="contact-content contact-content2">
-		<div class="row">
-			<div class="col-md-6">
-				<!-- GOOGLE MAP -->
-				<div id="google-map">
-					<div class="map1">
-						<div class="gmap1">
-							<div id="map1"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 cform" id="cform">
-				<div class="col-md-11">
-					<div class="map-address2">
-						<h5>London HQ</h5>
-						<p>BLVCK Fashion House,<br>Oatland Rood<br>UK, LS71JR</p>
-					</div>
-					<form class="contact-form contact-form2" id="contactForm" action="php/contact.php" method="post">
-					<h4>Write Us</h4>
-					<div class="row">
-						<div class="col-md-6">
-							<input name="senderName" id="senderName" required="required" type="text" class="input-left" placeholder="Name">
-						</div>
-						<div class="col-md-6">
-							<input type="email" name="senderEmail" id="senderEmail" placeholder="Email" required="required" >
-						</div>
-					</div>
-					<textarea name="message" id="message" placeholder="Message"></textarea>
-					<div class="clearfix space40"></div>
-					<button class="btn2 btn-center" type="submit">Send</button>
-				</form>
-				<div id="successMessage" class="successmessage">
-					<p><span class="success-ico"></span> Thanks for sending your message! We'll get back to you shortly.</p>
-				</div>
-				<div id="failureMessage" class="errormessage">
-					<p><span class="error-ico"></span> There was a problem sending your message. Please try again.</p>
-				</div>
-				<div id="incompleteMessage" class="statusMessage">
-					<p>Please complete all the fields in the form before sending.</p>
-				</div>
+	<!-- LOGIN / REGISTER CONTENT -->
+
+	<div class="logreg-content">
+		<div class="container">
+			<div class="login-content">
+				<div class="col-md-11 pull-right">
+					<h4>Upload dress</h4>
+					<form>
+						<input type="email" placeholder="Email">
+						<input type="name" placeholder="Name">
+						<input type="phone" placeholder="Phone">
+						<input type="dorm" placeholder="Dorm">
+						<input type="file" name="File">
+						<div class="clearfix space40"></div>
+						<button class="btn2 btn-center" type="submit">Upload!</button>
+						<div class="clearfix space40"></div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="clearfix"></div>
+<div class="clearfix"></div>
 
-	<!-- FOOTER -->
+<!-- FOOTER -->
 	<!-- FOOTER -->
 	<footer>
 		<div class="container">
@@ -257,10 +208,9 @@
 <script src="js/vendor/remodal/jquery.remodal.js"></script>
 <script src="js/jquery.sticky.js"></script>
 <script src="js/main.js"></script>
-<script src="http://maps.google.com/maps/api/js?sensor=true"></script> 
-<script src="js/vendor/gmap/gmaps.js"></script> 
-<script src="js/vendor/gmap/plugin1.js"></script>
-<script src="js/contact.js"></script>
+
+<!-- Addthis Script -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-54681352287788c3" async="async"></script>	
 
 </body>
 </html>

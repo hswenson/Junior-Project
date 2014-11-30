@@ -1,32 +1,25 @@
 $(document).ready(function() {
 
-    // Custom Select
+    var urlVarls = getUrlVars();
+    var skip = 0;
+    if (!isNaN(parseInt(urlVarls.skip)))
+        skip = parseInt(urlVarls.skip);
 
+    // Cache data
+    var __data = {
+        imageGrid: [],
+        currentLimit: 24,
+        currentSkip: skip
+    }
+
+    // Custom Select
     "use strict"; 
-    $('#cart-country').fancySelect();
-    $('#cart-town').fancySelect();
     $('#sm-size').fancySelect();
     $('#sm-color').fancySelect();
     $('#sm-quantity').fancySelect();
-    $('#si-sort').fancySelect();
-    $('#si-cat').fancySelect();
-    $('#si-size').fancySelect();
-    $('#si-color').fancySelect();
-    $('#si-price').fancySelect();
-
-    // Slide Menu
-    "use strict"; 
-    $('.menu-trigger').on('click', function() {
-        if ($('nav').hasClass('nav-active')) {
-            $('nav').removeClass('nav-active')
-            $(this).removeClass('menu-trigger-active')
-
-        } else {
-            $('nav').addClass('nav-active')
-            $(this).addClass('menu-trigger-active')
-
-        }
-    });
+    $('#si-size').fancySelect().on('change.fs', regenGrid);
+    $('#si-color').fancySelect().on('change.fs', regenGrid);
+    $('#si-length').fancySelect().on('change.fs', regenGrid);
 
     // Quantity Number
     "use strict"; 
@@ -48,14 +41,81 @@ $(document).ready(function() {
         }
 
         $button.parent().find("input").val(newVal);
-
     });
 
-    // Close Cart table
-    "use strict"; 
-    $(".close-cart").on("click", function() {
-        $(this).parent().parent().hide();
-    });
+    // Fire to backend
+    var getDressUrl = './api/dress/filter';
+
+    function getFilterOptions () {
+        return {
+            size: $('#si-size').val(),
+            length: $('#si-length').val(),
+            color: $('#si-color').val(),
+            limit: __data.currentLimit,
+            skip: __data.currentSkip
+        }
+    }
+
+    $('#previous-page').click(routeToPreviousPage);
+    $('#next-page').click(routeToNextPage);
+
+    function routeToNextPage() {
+        window.location = window.location.origin + window.location.pathname + '?' + $.param({
+            skip: __data.currentSkip + __data.currentLimit
+        })
+    }
+
+    function routeToPreviousPage() {
+        var currSkip = __data.currentSkip - __data.currentLimit
+        var skip
+        if (currSkip < 0) skip = 0
+        else skip = currSkip
+
+        window.location = window.location.origin + window.location.pathname + '?' + $.param({
+            skip: skip
+        })
+    }
+
+    function regenGrid () {
+        $('#list').empty();
+        console.log(getFilterOptions());
+        $.ajax(getDressUrl, {
+            data: getFilterOptions(),
+            dataType: 'json',
+            complete: function (res) {
+                __data.imageGrid = res.responseJSON || [];
+
+                __data.imageGrid.forEach(function (i) {
+                    //console.log(imageHtmlFactory(i));
+                    $('#list').append(imageHtmlFactory(i));
+                })
+            }
+        })
+    }
+    regenGrid();
+
+    function imageHtmlFactory (i) {
+        return '<li>' +
+            '<div class="product-image">' + 
+                '<div class="f1_container">' + 
+                '<div class="f1_card">' +
+                    '<div class="front face" style="width:200px">' +
+                        '<img src="' + i.url + '" class="img-responsive" alt="" style="max-width:100%" />' + 
+                    '</div>' + 
+                    '<div class="back face" style="width:200px">' +
+                        '<img src="' + i.url + '" class="img-responsive" alt="" style="max-width:100%" />' +
+                    '</div>' +
+                '</div>' +
+                '</div>' +
+                '<em class="quick-view" data-remodal-target="modal">Quick View</em>' +
+            '</div>' +
+            '<div class="product-info">' +
+                '<h4 class="product-name"><a href="./shop_item.html">' + i.brand + ', ' + i.size + '</a></h4>' +
+                '<p class="product-price"><span>' + i.user.name + '</span></p>' +
+            '</div>' +
+        '</li>';
+    }
+
 
     // Lookbook Sort
     "use strict"; 
@@ -96,6 +156,19 @@ $(document).ready(function() {
         $(this).addClass('active');
         $('.sort1, .sort2, .sort3, .sort4').removeClass('active');
     });
+
+    // Read a page's GET URL variables and return them as an associative array.
+    function getUrlVars() {   
+        var vars = {}, hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars[hash[0]] = hash[1];
+        }
+        console.log(vars);
+        return vars;
+    }
 
     // Owl news
     "use strict"; 

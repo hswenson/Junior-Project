@@ -155,16 +155,6 @@ Util.prototype.extendArray = function () {
 		}
 	}
 
-	Array.prototype.limit = function (lim) {
-		if (!lim) return this;
-		return this.splice(lim, this.length);
-	}
-
-	Array.prototype.skip = function (skip) {
-		if (!skip) return this;
-		return this.splice(0, skip);
-	}
-
 	Array.prototype.filterArray = function (toFilter) {
 		if (!toFilter) throw new Error('Need an array');
 		if (!Array.isArray(toFilter)) {

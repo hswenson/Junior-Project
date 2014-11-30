@@ -62,6 +62,7 @@ Routes.prototype.initRoutes = function () {
                     + '<p>dorm (required): <input type="text" name="dorm" /></p>'
                     + '<p>phone (required): <input type="text" name="phone" /></p>'
                     + '<p>description (required): <input type="text" name="description" /></p>'
+                    + '<p>brand (required): <input type="text" name="brand" /></p>'
                     + '<p>file: <input type="file" name="file" /></p>'
                     + '<p><input type="submit" value="Upload" /></p>'
                     + '</form>');
@@ -179,14 +180,12 @@ Routes.prototype._queryConverter = function (req) {
 	for (key in req.query) {
 		args[key] = req.query[key];
 	}
-
 	for (key in req.params) {
 		args[key] = req.params[key];
 	}
 	for (key in req.body) {
 		args[key] = req.body[key]
 	}
-
 	return args;
 }
 

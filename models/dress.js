@@ -24,11 +24,11 @@ var dressSchema = new mongoose.Schema({
 	length:
 		{ type: String, required: true},
 
-	shape:
-		{ type: String, required: true},
-
 	description:
 		{ type: String, required: true},
+
+	brand:
+		{ type: String, required: true},		
 
 	userId:
 		{ type: mongoose.Schema.Types.ObjectId, required: true},
@@ -48,19 +48,18 @@ dressSchema.index( {size: 1, color: 1, length: 1, shape: 1} );
  * @param {string} size;
  * @param {string array} color;
  * @param {string} length;
- * @param {string} shape;
  * @param {string} description;
  * @param {objectId} userId;
  */
-dressSchema.statics.make = function (size, color, length, shape, description, userId) {
+dressSchema.statics.make = function (size, color, length, description, userId, brand) {
 	var Dress = this;
 	return new Dress({
 		size: size,
 		color: color,
 		length: length,
-		shape: shape,
 		description: description,
-		userId: userId
+		userId: userId,
+		brand: brand		
 	})
 }
 

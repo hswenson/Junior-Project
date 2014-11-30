@@ -1502,8 +1502,7 @@ footer {
 }
 
 .login-content {
-	padding: 325px 0px 325px;
-	padding-right: 95px;
+	padding: 25px 300px 325px 300px;
 	background: #fff;
 }
 
@@ -3686,11 +3685,11 @@ backface-visibility: hidden;
 }
 
 header .col-md-5 {
-	width: 50%;
+	width: 70%;
 }
 
 header .col-md-7 {
-	width: 50%;
+	width: 30%;
 }
 
 .logo h1 a {

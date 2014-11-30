@@ -71,6 +71,15 @@ userSchema.statics.make = function (email) {
  ******************************************************/
 
 /**
+ * Get or create a user by id 
+ *
+ * @param {string} userId
+ */
+userSchema.statics.getById = function (userId, callback) {
+	this.findOne({ _id: userId }).exec(callback);
+}
+
+/**
  * Get or create a user by email 
  *
  * @param {string} email

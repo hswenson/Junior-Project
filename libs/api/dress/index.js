@@ -38,8 +38,13 @@ DressAPI.prototype.upload = function (args, ret) {
 				args.color = args.color.split(',');
 			}
 
-			var dress = Dress.make(args.size, args.color, args.length, args.shape, args.description, user._id)
-			dress.set('url', args.file.path);
+			var dress = Dress.make(args.size, args.color, args.length, args.description, user._id, args.brand);
+
+			var fileSplit = args.file.path.split('/');
+			var fileName = fileSplit[fileSplit.length - 1];
+			var url = './i/' + fileName;
+
+			dress.set('url', url);
 			dress.save(function (err) {
 				if (err) return ret(err);
 
@@ -57,13 +62,22 @@ DressAPI.prototype.upload = function (args, ret) {
  */
 DressAPI.prototype.filter = function (args, ret) {
 	var filterObj = {};
+	if (args.size) filterObj ['size'] = args.size;
+	if (args.color) filterObj ['color'] = args.color;
+	if (args.length) filterObj ['length'] = args.length;
 
-	if (args.size != null) filterObj ['size'] = args.size;
-	if (args.color != null) filterObj ['color'] = args.color;
-	if (args.length != null) filterObj ['length'] = args.length;
-	if (args.shape != null) filterObj ['shape'] = args.shape;
+	Dress.filter(filterObj, args.limit, args.skip, { created: -1 }, function (err, dresses) {
+		if (err) ret(err);
 
-	Dress.filter(filterObj, args.limit, args.skip, { created: -1 }, ret);
+		async.map(dresses, function (d, cb) {
+			User.getById(d.get('userId'), function (err, u) {
+				if (err) return cb(err);
+				
+				d.set('user', u, { strict: false });
+				cb(null, d);
+			})
+		}, ret);
+	});
 }
 
 
