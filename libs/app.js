@@ -55,7 +55,7 @@ App.startServers = function (config) {
 		me.use(express.compress());
 	    me.use(express.methodOverride());
 	    me.use(express.bodyParser({
-	        uploadDir: path.join(__dirname, '../images'),
+	        uploadDir: path.join(__dirname, '../uploads'),
 	        keepExtensions: true
 	    }));
 	    me.use(express.cookieParser());
@@ -63,7 +63,7 @@ App.startServers = function (config) {
 	        dumpExceptions: true,
 	        showStack: true
 	    }));
-	    me.use('/i', express.static(path.join(__dirname, '../images')));
+	    me.use('/i', express.static(path.join(__dirname, '../uploads')));
 	    me.use('/', express.static(path.join(__dirname, '../static')));
 	    me.use(me.router);
 	    me.use(me.config().app.api.prefix, App.apiApp)
