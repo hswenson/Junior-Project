@@ -45,6 +45,7 @@ $(document).ready(function() {
 
     // Fire to backend
     var getDressUrl = './api/dress/filter';
+    var postUploadUrl = './api/dress/upload';
 
     function getFilterOptions () {
         return {
@@ -78,7 +79,7 @@ $(document).ready(function() {
 
     function regenGrid () {
         $('#list').empty();
-        console.log(getFilterOptions());
+
         $.ajax(getDressUrl, {
             data: getFilterOptions(),
             dataType: 'json',
@@ -99,10 +100,10 @@ $(document).ready(function() {
             '<div class="product-image">' + 
                 '<div class="f1_container">' + 
                 '<div class="f1_card">' +
-                    '<div class="front face" style="width:200px">' +
+                    '<div class="front face">' +
                         '<img src="' + i.url + '" class="img-responsive" alt="" style="max-width:100%" />' + 
                     '</div>' + 
-                    '<div class="back face" style="width:200px">' +
+                    '<div class="back face">' +
                         '<img src="' + i.url + '" class="img-responsive" alt="" style="max-width:100%" />' +
                     '</div>' +
                 '</div>' +
@@ -115,6 +116,33 @@ $(document).ready(function() {
             '</div>' +
         '</li>';
     }
+
+    function uploadSuccess (res) {
+        alert('Your dress was successfully uploaded!')
+
+        window.location = window.location.origin;
+    }
+
+    $('#upload-button').click(function(){
+        console.log($('#upload-form'))
+        var formData = new FormData($('#upload-form')[0]);
+        console.log(formData)
+        $.ajax({
+            url: postUploadUrl,  //Server script to process data
+            type: 'POST',
+            dataType: 'json',
+            success: uploadSuccess,
+            error: function () {
+                alert('Please fill out all fields and try again!')
+            },
+            // Form data
+            data: formData,
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });    
 
 
     // Lookbook Sort

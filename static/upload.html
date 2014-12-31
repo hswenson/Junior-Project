@@ -94,14 +94,19 @@
 			<div class="login-content">
 				<div class="col-md-11 pull-right">
 					<h4>Upload dress</h4>
-					<form>
-						<input type="email" placeholder="Email">
-						<input type="name" placeholder="Name">
-						<input type="phone" placeholder="Phone">
-						<input type="dorm" placeholder="Dorm">
-						<input type="file" name="File">
+					<form id="upload-form" enctype="multipart/form-data">
+						<input name="email" placeholder="Email">
+						<input name="name" placeholder="Name">
+						<input name="phone" placeholder="Phone">
+						<input name="dorm" placeholder="Dorm">
+						<input name="size" placeholder="Size">
+						<input name="color" placeholder="Color">
+						<input name="length" placeholder="Length">
+						<input name="brand" placeholder="Brand">
+						<input name="description" placeholder="Description">
+						<input type="file" name="file">
 						<div class="clearfix space40"></div>
-						<button class="btn2 btn-center" type="submit">Upload!</button>
+						<button id="upload-button" class="btn2 btn-center" type="button">Upload!</button>
 						<div class="clearfix space40"></div>
 					</form>
 				</div>
