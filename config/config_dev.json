@@ -14,12 +14,6 @@
                     "keepAlive": 60
                 }
             }
-            "replset": {
-                "auto_reconnect": true,
-                "socketOptions": {
-                    "keepAlive": 60
-                }
-            }
         },
         "dbs": [
             {
