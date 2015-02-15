@@ -25,13 +25,6 @@ module.exports = (function () {
                 },
                 db: {},
                 safe: true
-
-                replset: {
-                    auto_reconnect: true,
-                    keepAlive: 1
-                },
-                db: {},
-                safe: true
     		},
         	dbs: []
         }
