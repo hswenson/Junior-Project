@@ -1,3 +1,6 @@
+/* LOOK HERE : use filters and page limits and skips */
+
+
 $(document).ready(function() {
 
     var urlVarls = getUrlVars();
@@ -112,7 +115,10 @@ $(document).ready(function() {
             '</div>' +
             '<div class="product-info">' +
                 '<h4 class="product-name"><a href="./shop_item.html">' + i.brand + ', ' + i.size + '</a></h4>' +
-                '<p class="product-price"><span>' + i.user.name + '</span></p>' +
+                '<span>' + i.user.name + '<br>' +
+                i.user.email + '<br>' +
+                '<em>Phone:</em> ' + i.user.phone + '<br>' +
+                '<em>Dorm:</em> ' + i.user.dorm +'</span>'
             '</div>' +
         '</li>';
     }

@@ -3,7 +3,6 @@
  *
  * The top level configuration loader
  *
- * @author Nick Swenson
  */
 
 /**

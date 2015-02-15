@@ -86,13 +86,11 @@ module.exports = [
 				{
 					paramType: 'form',
 					name: 'size',
-					description: 'Size of the dress',
 					dataType: 'string'
 				},
 				{
 					paramType: 'form',
 					name: 'color',
-					description: 'The color of the dress',
 					dataType: 'array(string)'
 				},
 				{

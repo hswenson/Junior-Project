@@ -1,9 +1,5 @@
 /**
  * server.js
- *
- * The server initializer for the simpleplus service
- *
- * @author Nick Swenson
  */
 
 /**
