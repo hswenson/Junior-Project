@@ -6,4 +6,6 @@ fleet.json
 chats/*
 *.rdb
 .idea
-uploads/*
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
