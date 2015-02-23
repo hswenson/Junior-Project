@@ -1,8 +1,8 @@
 {
     "app": {
-        "host": "localhost",
+        "host": "powerful-hollows-5357.herokuapp.com",
         "ports": [
-            { "port": 6789 }
+            { "port": 80 }
         ]
     },
 
@@ -17,11 +17,11 @@
         },
         "dbs": [
             {
-                "dbname": "jp",
+                "dbname": "heroku_app32761152", 
                 "name": "jp",
-                "options": {},
+                "options": {"user": "hswenson", "pass": "swenson1"},
                 "members": [
-                    { "host": "localhost", "port": 27017 }
+                    { "host": "ds047581.mongolab.com", "port": 47581 }
                 ]
             }
         ]
