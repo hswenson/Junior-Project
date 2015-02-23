@@ -51,7 +51,7 @@ App.startServers = function (config) {
 	this.config(config);
 
 	this.configure(function () {
-		me.set('ports', me.config().app.ports || [{ port: 8000 }] );
+		me.set('ports',  process.env.PORT ? [{ port: process.env.PORT }] : me.config().app.ports );
 		me.use(express.compress());
 	    me.use(express.methodOverride());
 	    me.use(express.bodyParser({
