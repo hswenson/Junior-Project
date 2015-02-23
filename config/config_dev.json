@@ -2,7 +2,7 @@
     "app": {
         "host": "powerful-hollows-5357.herokuapp.com",
         "ports": [
-            { "port": 80 }
+            { "port": 8888 }
         ]
     },
 
