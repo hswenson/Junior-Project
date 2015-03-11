@@ -30,7 +30,6 @@
 	"scripts":
 	{
 		"start": "node server.js",
-		"test": "node tests/libs/init.js runall"
 	},
 	"version": "0.0.1"
 }
