@@ -77,7 +77,7 @@ App.startServers = function (config) {
 	    		return next();
 	    	} else if (req.query.ticket) {
 	    		validateUrl = "https://fed.princeton.edu/cas/validate";
-				return request.get({uri: validateUrl, qs: {service: serviceUrl, ticket: req.query.ticket}}, function (err, res, body) {
+				return request.get({uri: validateUrl, qs: {service: serviceUrl, ticket: req.query.ticket}}, function (err, butts, body) {
 					if (err) return next(err);
 					
 					// Is valid
