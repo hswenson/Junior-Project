@@ -29,8 +29,7 @@
 	"private": true,
 	"scripts":
 	{
-		"start": "node server.js",
-		"test": "node tests/libs/init.js runall"
+		"start": "node server.js"
 	},
 	"version": "0.0.1"
 }

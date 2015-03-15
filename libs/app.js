@@ -15,7 +15,8 @@ var async = require('async')
   , http = require('http')
   , defaultConfig = require('../config')
   , Api = require('./api')
-  , routes = require('./routes');
+  , routes = require('./routes')
+  , request = require('request');
 
 /**
  * Construct class
@@ -59,6 +60,38 @@ App.startServers = function (config) {
 	        keepExtensions: true
 	    }));
 	    me.use(express.cookieParser());
+	    me.use(function (req, res, next) {
+	    	var validateUrl;
+	    	var url = "https://fed.princeton.edu/cas/login?service=";
+	    	var serviceUrl = ""
+	    	if (typeof req.get('referer') == 'string') {
+	    		var protocol = req.get('referer').split('://')[0];
+	    		serviceUrl = encodeURIComponent(protocol + '://' + req.get('host'));
+	    		url += serviceUrl;
+	    	} else {
+	    		serviceUrl = encodeURIComponent('http://' + req.get('host'));
+	    		url += serviceUrl;
+	    	}
+	    	
+	    	if (req.cookies.isPrincetonAuthorized) {
+	    		return next();
+	    	} else if (req.query.ticket) {
+	    		validateUrl = "https://fed.princeton.edu/cas/validate?service=" + serviceUrl + "&ticket=" + req.query.ticket;
+				return request(validateUrl, function (err, res, body) {
+					if (err) return next(err);
+					
+					// Is valid
+					if (typeof body == 'string' && body.indexOf('yes') > 0) {
+						res.cookie('isPrincetonAuthorized', true, { maxAge: 900000 })
+						return next();
+					} else {
+						res.redirect(url);
+					}
+				})
+	    	} else {
+	    		res.redirect(url);
+	    	}
+	    });
 	    me.use(express.errorHandler({
 	        dumpExceptions: true,
 	        showStack: true
