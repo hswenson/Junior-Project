@@ -69,15 +69,15 @@ App.startServers = function (config) {
 	    		serviceUrl = encodeURIComponent(protocol + '://' + req.get('host'));
 	    		url += serviceUrl;
 	    	} else {
-	    		serviceUrl = encodeURIComponent('http://' + req.get('host'));
+	    		serviceUrl = encodeURIComponent('https://' + req.get('host'));
 	    		url += serviceUrl;
 	    	}
 	    	
 	    	if (req.cookies.isPrincetonAuthorized) {
 	    		return next();
 	    	} else if (req.query.ticket) {
-	    		validateUrl = "https://fed.princeton.edu/cas/validate?service=" + serviceUrl + "&ticket=" + req.query.ticket;
-				return request(validateUrl, function (err, res, body) {
+	    		validateUrl = "https://fed.princeton.edu/cas/validate";
+				return request.get({uri: validateUrl, qs: {service: serviceUrl, ticket: req.query.ticket}}, function (err, res, body) {
 					if (err) return next(err);
 					
 					// Is valid
