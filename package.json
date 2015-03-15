@@ -10,7 +10,7 @@
 		"lodash": "~2.4.1",
 		"mongoose": "~3.8.0",
 		"nodeunit": "~0.8.2",
-		"request": "~0.8.0",
+		"request": "~2.53.0",
 		"winston": "~0.7.3"
 	},
 	"description": "A junior project for hannah",
