@@ -63,15 +63,8 @@ App.startServers = function (config) {
 	    me.use(function (req, res, next) {
 	    	var validateUrl;
 	    	var url = "https://fed.princeton.edu/cas/login?service=";
-	    	var serviceUrl = ""
-	    	if (typeof req.get('referer') == 'string') {
-	    		var protocol = req.get('referer').split('://')[0];
-	    		serviceUrl = encodeURIComponent(protocol + '://' + req.get('host'));
-	    		url += serviceUrl;
-	    	} else {
-	    		serviceUrl = encodeURIComponent('http://' + req.get('host'));
-	    		url += serviceUrl;
-	    	}
+	    	var serviceUrl = 'http://powerful-hollows-5357.herokuapp.com';
+	    	url += serviceUrl;
 	    	
 	    	if (req.cookies.isPrincetonAuthorized) {
 	    		return next();
@@ -81,7 +74,7 @@ App.startServers = function (config) {
 					if (err) return next(err);
 					
 					// Is valid
-					if (typeof body == 'string' && body.indexOf('yes') > 0) {
+					if (typeof body == 'string' && body.indexOf('yes') > -1) {
 						res.cookie('isPrincetonAuthorized', true, { maxAge: 900000 })
 						return next();
 					} else {
