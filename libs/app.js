@@ -85,11 +85,11 @@ App.startServers = function (config) {
 						res.cookie('isPrincetonAuthorized', true, { maxAge: 900000 })
 						return next();
 					} else {
-						res.redirect(url);
+						res.redirect("You are not authenticated.");
 					}
 				})
 	    	} else {
-	    		res.send("You are not authenticated.");
+	    		res.redirect(url);
 	    	}
 	    });
 	    me.use(express.errorHandler({
