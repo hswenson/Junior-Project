@@ -69,7 +69,7 @@ App.startServers = function (config) {
 	    		serviceUrl = encodeURIComponent(protocol + '://' + req.get('host'));
 	    		url += serviceUrl;
 	    	} else {
-	    		serviceUrl = encodeURIComponent('https://' + req.get('host'));
+	    		serviceUrl = encodeURIComponent('http://' + req.get('host'));
 	    		url += serviceUrl;
 	    	}
 	    	
@@ -89,7 +89,7 @@ App.startServers = function (config) {
 					}
 				})
 	    	} else {
-	    		res.redirect(url);
+	    		res.send("You are not authenticated.");
 	    	}
 	    });
 	    me.use(express.errorHandler({
