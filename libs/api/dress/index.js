@@ -6,7 +6,8 @@
  */
 var async = require('async')
   , config = require('../../../config')
-  , models = require('../../../models');
+  , models = require('../../../models')
+  , fs = require('fs');
 
 
 /**
@@ -40,11 +41,14 @@ DressAPI.prototype.upload = function (args, ret) {
 
 			var dress = Dress.make(args.size, args.color, args.length, args.description, user._id, args.brand);
 
-			var fileSplit = args.file.path.split('/');
-			var fileName = fileSplit[fileSplit.length - 1];
-			var url = './i/' + fileName;
+			var imagebuffer = fs.readFileSync(args.file.path);
+			var base64image = imagebuffer.toString('base64');
 
-			dress.set('url', url);
+			dress.set("contenttype", args.contentType);
+			dress.set("imagedata", base64image);
+
+			fs.unlinkSync(args.file.path);
+
 			dress.save(function (err) {
 				if (err) return ret(err);
 

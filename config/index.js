@@ -26,6 +26,9 @@ var config = (function () {
         case 'test':
             return extend(true, require('./config.js'), require('./config_test.json'));
 
+        case 'local':
+            return extend(true, require('./config.js'), require('./config_local.json'));
+
         default:
             return util.log(' ---- ERROR LOADING CONFIG FILE! ---- ');
     }

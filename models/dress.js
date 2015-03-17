@@ -33,8 +33,11 @@ var dressSchema = new mongoose.Schema({
 	userId:
 		{ type: mongoose.Schema.Types.ObjectId, required: true},
 
-	url: 
-		{ type: String, required: true},
+	imagedata: 
+		{ type: String, required: false},
+
+	contenttype:
+		{ type: String, required: false},
 
 	created:
 		{ type: Date, default: Date.now }

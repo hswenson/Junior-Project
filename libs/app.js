@@ -60,31 +60,33 @@ App.startServers = function (config) {
 	        keepExtensions: true
 	    }));
 	    me.use(express.cookieParser());
-	    me.use(function (req, res, next) {
-	    	var validateUrl;
-	    	var url = "https://fed.princeton.edu/cas/login?service=";
-	    	var serviceUrl = 'http://powerful-hollows-5357.herokuapp.com';
-	    	url += serviceUrl;
-	    	
-	    	if (req.cookies.isPrincetonAuthorized) {
-	    		return next();
-	    	} else if (req.query.ticket) {
-	    		validateUrl = "https://fed.princeton.edu/cas/validate";
-				return request.get({uri: validateUrl, qs: {service: serviceUrl, ticket: req.query.ticket}}, function (err, butts, body) {
-					if (err) return next(err);
-					
-					// Is valid
-					if (typeof body == 'string' && body.indexOf('yes') > -1) {
-						res.cookie('isPrincetonAuthorized', true, { maxAge: 900000 })
-						return next();
-					} else {
-						res.send("You are not authenticated.");
-					}
-				})
-	    	} else {
-	    		res.redirect(url);
-	    	}
-	    });
+		if (process.env.NODE_ENV != "local") {
+		    me.use(function (req, res, next) {
+		    	var validateUrl;
+		    	var url = "https://fed.princeton.edu/cas/login?service=";
+		    	var serviceUrl = 'http://powerful-hollows-5357.herokuapp.com';
+		    	url += serviceUrl;
+		    	
+		    	if (req.cookies.isPrincetonAuthorized) {
+		    		return next();
+		    	} else if (req.query.ticket) {
+		    		validateUrl = "https://fed.princeton.edu/cas/validate";
+					return request.get({uri: validateUrl, qs: {service: serviceUrl, ticket: req.query.ticket}}, function (err, butts, body) {
+						if (err) return next(err);
+						
+						// Is valid
+						if (typeof body == 'string' && body.indexOf('yes') > -1) {
+							res.cookie('isPrincetonAuthorized', true, { maxAge: 900000 })
+							return next();
+						} else {
+							res.send("You are not authenticated.");
+						}
+					})
+		    	} else {
+		    		res.redirect(url);
+		    	}
+		    });
+		}
 	    me.use(express.errorHandler({
 	        dumpExceptions: true,
 	        showStack: true

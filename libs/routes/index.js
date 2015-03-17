@@ -174,6 +174,7 @@ Routes.prototype._queryConverter = function (req) {
 	for (key in req.body) {
 		args[key] = req.body[key]
 	}
+	args["contentType"] = req.get('content-type')
 	return args;
 }
 

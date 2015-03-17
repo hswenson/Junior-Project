@@ -99,26 +99,31 @@ $(document).ready(function() {
     regenGrid();
 
     function imageHtmlFactory (i) {
+
+        var imagesrc = "data:" + i.contenttype + ";base64," + i.imagedata;
+
         return '<li>' +
             '<div class="product-image">' + 
-                '<div class="f1_container">' + 
-                '<div class="f1_card">' +
-                    '<div class="front face">' +
-                        '<img src="' + i.url + '" class="img-responsive" alt="" style="max-width:100%" />' + 
+                '<div class="f1_container" style="height:250px;width:190px">' + 
+                '<div class="f1_card" >' +
+                    '<div class="front face" style="background-image: url(\'' + imagesrc +'\');background-position:center;background-size:cover;">' +
+                        //'<div style="background-image: url("' + imagesrc +'")"></div>' +
+                        //'<img src="' + imagesrc + '" class="img-responsive" alt="" style="max-width:none; width:auto; height:100%" />' + 
                     '</div>' + 
                     '<div class="back face">' +
-                        '<img src="' + i.url + '" class="img-responsive" alt="" style="max-width:100%" />' +
+                        '<img src="' + imagesrc + '" class="img-responsive" alt="" style="width:auto: height:100%" />' +
                     '</div>' +
                 '</div>' +
                 '</div>' +
                 '<em class="quick-view" data-remodal-target="modal">Quick View</em>' +
             '</div>' +
-            '<div class="product-info">' +
+            '<div class="product-info" >' +
                 '<h4 class="product-name"><a href="./shop_item.html">' + i.brand + ', ' + i.size + '</a></h4>' +
                 '<span>' + i.user.name + '<br>' +
                 i.user.email + '<br>' +
                 '<em>Phone:</em> ' + i.user.phone + '<br>' +
-                '<em>Dorm:</em> ' + i.user.dorm +'</span>'
+                '<em>Dorm:</em> ' + i.user.dorm  +
+                '<em> </em> ' +'</span>'
             '</div>' +
         '</li>';
     }

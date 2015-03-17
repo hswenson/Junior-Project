@@ -1,0 +1,29 @@
+{
+    "app": {
+        "host": "localhost",
+        "ports": [
+            { "port": 6789 }
+        ]
+    },
+
+	"mongo": {
+	    "options": {
+            "server": {
+                "auto_reconnect": true,
+                "socketOptions": {
+                    "keepAlive": 60
+                }
+            }
+        },
+        "dbs": [
+            {
+                "dbname": "local_db", 
+                "name": "jp",
+                "options": {},
+                "members": [
+                    { "host": "localhost", "port": 27017 }
+                ]
+            }
+        ]
+    }
+}
