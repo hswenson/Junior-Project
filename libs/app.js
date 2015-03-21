@@ -85,11 +85,13 @@ App.startServers = function (config) {
 							var username = body.split('\n')[1];
 							var email = username + "@princeton.edu"
 
+							res.cookie('isLoggedOut', "");
 							res.cookie('isPrincetonAuthorized', email, { maxAge: 900000 });
 							User.getOrCreate(email, next);
-
 						} else {
-							res.send("You are not authenticated.");
+							res.cookie('isLoggedOut', true);
+							res.cookie('isPrincetonAuthorized', "");
+							res.redirect(url);
 						}
 					})
 		    	} else if (!req.cookies.isLoggedOut) {
