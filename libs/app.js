@@ -93,7 +93,7 @@ App.startServers = function (config) {
 						}
 					})
 		    	} else {
-		    		res.redirect(url);
+		    		res.redirect("https://fed.princeton.edu/cas/logout?service=" + serviceUrl);
 		    	}
 		    });
 		} else {
