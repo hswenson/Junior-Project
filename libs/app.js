@@ -16,6 +16,7 @@ var async = require('async')
   , defaultConfig = require('../config')
   , Api = require('./api')
   , routes = require('./routes')
+  , models = require('../models')
   , request = require('request');
 
 /**
@@ -24,6 +25,8 @@ var async = require('async')
  * @param {number} [config.app.port]
  */
 var App = express();
+
+var User = models.User;
 
 /** Add properties for convenience **/
 App.console = console;
