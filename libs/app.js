@@ -92,8 +92,11 @@ App.startServers = function (config) {
 							res.send("You are not authenticated.");
 						}
 					})
-		    	} else {
+		    	} else if (!req.cookies.isLoggedOut) {
+		    		res.cookie('isLoggedOut', true);
 		    		res.redirect("https://fed.princeton.edu/cas/logout?service=" + serviceUrl);
+		    	} else {
+		    		res.redirect(serviceUrl);
 		    	}
 		    });
 		} else {
