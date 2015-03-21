@@ -96,7 +96,7 @@ App.startServers = function (config) {
 		    		res.cookie('isLoggedOut', true);
 		    		res.redirect("https://fed.princeton.edu/cas/logout?service=" + serviceUrl);
 		    	} else {
-		    		res.redirect(serviceUrl);
+		    		res.redirect(url);
 		    	}
 		    });
 		} else {
