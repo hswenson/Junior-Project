@@ -1,6 +1,39 @@
 /* LOOK HERE : use filters and page limits and skips */
 
 
+function createCookie(name, value, days) {
+    var expires;
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = encodeURIComponent(name) + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+
+function logOut () {
+    eraseCookie("isPrincetonAuthorized", null);
+    location.reload(true)
+}
+
 $(document).ready(function() {
 
     var urlVarls = getUrlVars();
@@ -11,6 +44,7 @@ $(document).ready(function() {
     // Cache data
     var __data = {
         imageGrid: [],
+        userInfo: {},
         currentLimit: 24,
         currentSkip: skip
     }
@@ -48,6 +82,7 @@ $(document).ready(function() {
 
     // Fire to backend
     var getDressUrl = './api/dress/filter';
+    var getUserUrl= './api/user/get';
     var postUploadUrl = './api/dress/upload';
 
     function getFilterOptions () {
@@ -98,6 +133,93 @@ $(document).ready(function() {
     }
     regenGrid();
 
+    function getUser () {
+        $.ajax(getUserUrl, {
+            data: {},
+            dataType: 'json',
+            complete: function (res) {
+                __data.userInfo = res.responseJSON || {};
+
+                $('#dressUploadForm').append(uploadFormGenerator(res.responseJSON));
+
+                $('#upload-button').click(function(){
+                    var formData = new FormData($('#upload-form')[0]);
+                    console.log(formData);
+                    $.ajax({
+                        url: postUploadUrl,  //Server script to process data
+                        type: 'POST',
+                        dataType: 'json',
+                        success: uploadSuccess,
+                        error: function () {
+                            alert('Please fill out all fields and try again!')
+                        },
+                        // Form data
+                        data: formData,
+                        //Options to tell jQuery not to process data or worry about content-type.
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+                });    
+                
+            }
+
+        })
+    }
+    getUser();
+
+    function uploadFormGenerator (user) {
+
+        var formstring = '<form id="upload-form" enctype="multipart/form-data">'
+
+        if (!user.name) {
+            formstring += '<input name="name" placeholder="Name">';
+            formstring += '<input name="phone" placeholder="Phone">';
+        }
+
+        formstring += '<input name="dorm" placeholder="Dorm">' +
+                '<select id="si-size" name="size">' +
+                    '<option value="">Size</option>' +
+                    '<option value="00">00</option>' +
+                    '<option value="0">0</option>' +
+                    '<option value="2">2</option>' +
+                    '<option value="4">4</option>' +
+                    '<option value="6">6</option>' +
+                    '<option value="8">8</option>' +
+                    '<option value="10">10</option>' +
+                    '<option value="12">12</option>' +
+                '</select>' +
+
+                '<select id="si-color" name="color">' +
+                    '<option value="">Color</option>' +
+                    '<option value="black">Black</option>' +
+                    '<option value="blue">Blue</option>' +
+                    '<option value="white">White</option>' +
+                    '<option value="pink">Pink</option>' +
+                    '<option value="red">Red</option>' +
+                    '<option value="green">Green</option>' +
+                    '<option value="grey">Grey</option>' +
+                    '<option value="other">Other</option>' +
+                '</select>' +
+
+                '<select id="si-length" name="length">' +
+                    '<option value="">Length</option>' +
+                    '<option value="mini">Mini</option>' +
+                    '<option value="midi">Midi</option>' +
+                    '<option value="maxi">Maxi</option>' +
+                '</select>' +
+
+                '<input name="brand" placeholder="Brand">' +
+                '<input name="description" placeholder="Description">' +
+                '<input type="file" name="file">' +
+                '<div class="clearfix space40"></div>' +
+                '<button id="upload-button" class="btn2 btn-center" type="button">Upload!</button>' +
+                '<div class="clearfix space40"></div>'  +
+        '</form>';
+
+        return formstring;
+    }
+
     function imageHtmlFactory (i) {
 
         var imagesrc = "data:" + i.contenttype + ";base64," + i.imagedata;
@@ -118,7 +240,7 @@ $(document).ready(function() {
                 '<em class="quick-view" data-remodal-target="modal">Quick View</em>' +
             '</div>' +
             '<div class="product-info" >' +
-                '<h4 class="product-name"><a href="./shop_item.html">' + i.brand + ', ' + i.size + '</a></h4>' +
+                '<h4 class="product-name"><a >' + i.brand + ', ' + i.size + '</a></h4>' +
                 '<span>' + i.user.name + '<br>' +
                 i.user.email + '<br>' +
                 '<em>Phone:</em> ' + i.user.phone + '<br>' +
@@ -133,28 +255,6 @@ $(document).ready(function() {
 
         window.location = window.location.origin;
     }
-
-    $('#upload-button').click(function(){
-        console.log($('#upload-form'))
-        var formData = new FormData($('#upload-form')[0]);
-        console.log(formData)
-        $.ajax({
-            url: postUploadUrl,  //Server script to process data
-            type: 'POST',
-            dataType: 'json',
-            success: uploadSuccess,
-            error: function () {
-                alert('Please fill out all fields and try again!')
-            },
-            // Form data
-            data: formData,
-            //Options to tell jQuery not to process data or worry about content-type.
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-    });    
-
 
     // Lookbook Sort
     "use strict"; 

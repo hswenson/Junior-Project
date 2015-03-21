@@ -68,6 +68,14 @@ Routes.prototype.initRoutes = function () {
 		skipAuth: true
 	})
 
+	// Redirect to docs
+	this.registerRoute({
+		fn: Api.user.get,
+		path: '/user/get',
+		methods: [ 'GET' ],
+		skipAuth: true
+	})
+
 	/** Guest Routes **/
 	this.registerRoute({
 		fn: Api.dress.filter,
@@ -175,6 +183,10 @@ Routes.prototype._queryConverter = function (req) {
 		args[key] = req.body[key]
 	}
 	args["contentType"] = req.get('content-type')
+
+	if (req.cookies.isPrincetonAuthorized) {
+		args['email'] = req.cookies.isPrincetonAuthorized;
+ 	}
 	return args;
 }
 

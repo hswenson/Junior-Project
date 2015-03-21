@@ -31,7 +31,9 @@ DressAPI.prototype.upload = function (args, ret) {
 	User.getOrCreate(args.email, function (err, user) {
 		if (err) return ret(err);
 
-		user.set('name', args.name).set('phone', args.phone).set('dorm', args.dorm);
+		if (args.name) user.set('name', args.name);
+		if (args.phone) user.set('phone', args.phone);
+		if (args.dorm) user.set('dorm', args.dorm);
 		user.save(function (err) {
 			if (err) return ret(err);
 

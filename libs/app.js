@@ -68,7 +68,9 @@ App.startServers = function (config) {
 		    	url += serviceUrl;
 		    	
 		    	if (req.cookies.isPrincetonAuthorized) {
-		    		return next();
+		    		res.cookie('isPrincetonAuthorized', req.cookies.isPrincetonAuthorized, { maxAge: 900000 });
+		    		var email = req.cookies.isPrincetonAuthorized;
+		    		User.getOrCreate(email, next);
 		    	} else if (req.query.ticket) {
 		    		validateUrl = "https://fed.princeton.edu/cas/validate";
 					return request.get({uri: validateUrl, qs: {service: serviceUrl, ticket: req.query.ticket}}, function (err, butts, body) {
@@ -76,8 +78,13 @@ App.startServers = function (config) {
 						
 						// Is valid
 						if (typeof body == 'string' && body.indexOf('yes') > -1) {
-							res.cookie('isPrincetonAuthorized', true, { maxAge: 900000 })
-							return next();
+							
+							var username = body.split('\n')[1];
+							var email = username + "@princeton.edu"
+
+							res.cookie('isPrincetonAuthorized', email, { maxAge: 900000 });
+							User.getOrCreate(email, next);
+
 						} else {
 							res.send("You are not authenticated.");
 						}
@@ -86,6 +93,11 @@ App.startServers = function (config) {
 		    		res.redirect(url);
 		    	}
 		    });
+		} else {
+			me.use(function (req, res, next) {
+				res.cookie('isPrincetonAuthorized', 'test@test.com');
+				next();
+			})
 		}
 	    me.use(express.errorHandler({
 	        dumpExceptions: true,

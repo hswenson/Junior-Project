@@ -6,7 +6,7 @@
  * Module dependencies
  */
 var DressAPI = require('./dress');
-
+var UserAPI = require('./user');
 /**
  * Initialize API
  */
@@ -18,6 +18,9 @@ var Api = function () {
  * Device functions
  */
 Api.prototype.dress = DressAPI;
+
+Api.prototype.user = UserAPI;
+
 
 module.exports = new Api();
 
