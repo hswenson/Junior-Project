@@ -90,8 +90,7 @@ App.startServers = function (config) {
 							User.getOrCreate(email, next);
 						} else {
 							res.cookie('isLoggedOut', true);
-							res.cookie('isPrincetonAuthorized', "");
-							res.redirect(url);
+							res.redirect("https://fed.princeton.edu/cas/logout?service=" + serviceUrl);
 						}
 					})
 		    	} else if (!req.cookies.isLoggedOut) {
