@@ -102,7 +102,7 @@ userSchema.statics.getOrCreate = function (email, callback) {
 
 	async.series([
 		// Get the user if exists
-		function (cb) {
+		function (cb) {			
 			User.getByEmail(email, function (err, u) {
 				if (err) return cb(err);
 				else if (u) {
@@ -119,7 +119,7 @@ userSchema.statics.getOrCreate = function (email, callback) {
 			user = User.make(email);
 			user.save(cb);
 		}
-	], function (err) {
+	], function (err) {	
 		if (err) return callback(err)
 
 		return callback(null, user);

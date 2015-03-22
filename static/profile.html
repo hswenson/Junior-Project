@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+<head>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="keywords" content="HTML5 Template" />
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Rouge</title>
+
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<!-- Google Webfont -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Seaweed+Script' rel='stylesheet' type='text/css'>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="js/vendor/rsplugin/rs-plugin/css/settings.css" media="screen"/>
+	<link rel="stylesheet" href="js/vendor/fancyselect/fancySelect.css">
+	<link rel="stylesheet" href="js/vendor/owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" href="js/vendor/owl-carousel/owl.theme.css">
+	<link rel="stylesheet" href="js/vendor/owl-carousel/owl.transitions.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="js/vendor/remodal/jquery.remodal.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+     		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+<div class="body">
+
+	<!-- HEADER -->
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 logo">
+					<h1>
+						<span class="menu-trigger">
+						<em class="mt1"></em>
+						<em class="mt2"></em>
+						<em class="mt3"></em>
+						</span>
+						<a href="./">Rouge</a>
+					</h1>
+				</div>
+				<div class="col-md-7">
+					<ul class="topbar">
+						<li><a href="./">Home</a></li>
+						<li><a onclick="logOut()" href="#">Logout</a></li>
+						<li><a href="./upload.html">Upload</a></li>
+<!-- 						<li class="tb-cart">
+							<a href="#">Cart</a>
+							<span class="cart-dropdown">
+								<a href='./cart.html'>Cart</a>
+								<a href='./checkout.html'>Checkout</a>
+							</span>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- NAVIGATION -->
+	<nav class="">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div id='cssmenu'>
+						<ul>
+							<li><a href='./shop.html'>Shop</a></li>
+							<li><a href='./shop_item.html'>Product</a></li>
+							<li><a href='./cart.html'>Cart</a></li>
+							<li><a href='./checkout.html'>Checkout</a></li>
+							<li><a href='./index_2.html'>News</a></li>
+							<li><a href='./index_3.html'>About</a></li>
+							<li class='active'>
+								<a href='#'>Contact</a>
+								<ul>
+									<li><a href='./contact1.html'>Contact - 1</a></li>
+									<li><a href='./contact2.html'>Contact - 2</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<form class="search">
+						<input type="search" placeholder="Enter text here...">
+						<button type="submit"></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- SHOP CONTENT -->
+	<div class="shop-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul id="profileBodyHeader" class="splitter">
+						<li class="splitter-inner">
+							<select id="si-size">
+								<option value="">Size</option>
+								<option value="00">00</option>
+								<option value="0">0</option>
+								<option value="2">2</option>
+								<option value="4">4</option>
+								<option value="6">6</option>
+								<option value="8">8</option>
+								<option value="10">10</option>
+								<option value="12">12</option>
+							</select>
+						</li>
+
+						<li class="splitter-inner">
+							<select id="si-color">
+								<option value="">Color</option>
+								<option value="black">Black</option>
+								<option value="blue">Blue</option>
+								<option value="white">White</option>
+								<option value="pink">Pink</option>
+								<option value="red">Red</option>
+								<option value="green">Green</option>
+								<option value="grey">Grey</option>
+								<option value="other">Other</option>
+							</select>
+						</li>
+
+						<li class="splitter-inner">
+							<select id="si-length">
+								<option value="">Length</option>
+								<option value="mini">Mini</option>
+								<option value="midi">Midi</option>
+								<option value="maxi">Maxi</option>
+							</select>
+						</li>
+					</ul>
+					<ul class="sort-count">
+						<li><a href="./">View all</a></li>
+					</ul>		
+					<ul id="list" class="image-grid">
+						<!-- Images dynamically appended -->
+					</ul>					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page_nav">
+		<ul>
+			<li class="prev"><a id="previous-page" style="cursor:pointer;">Previous</a></li>
+			<li class="next"><a id="next-page" style="cursor:pointer;">Next</a></li>
+		</ul>
+	</div>
+
+	<div class="clearfix"></div>
+	<div class="space80"></div>
+
+	<!-- FOOTER -->
+	<!-- FOOTER -->
+	<footer>
+		
+	</footer>
+</div>
+
+<!-- SHOP QUICKVIEW MODAL - DEMO -->
+<div class="remodal" data-remodal-id="modal">
+	<div class="row">
+		<div class="col-md-6">
+			<img src="images/shop/1-big.jpg" class="img-responsive" alt="">
+		</div>
+		<div class="col-md-6">
+			<div class="ss-inner">
+				<ul class="shop-meta">
+					<li>
+						<select id="sm-size">
+							<option value="">Size</option>
+							<option value="L">L</option>
+							<option value="XL">XL</option>
+							<option value="XXL">XXL</option>
+						</select>
+					</li>
+					<li>
+						<select id="sm-color">
+							<option value="">Color</option>
+							<option value="Red">Red</option>
+							<option value="Pink">Pink</option>
+							<option value="White">White</option>
+							<option value="Black">Black</option>
+						</select>
+					</li>
+					<li>
+						<select id="sm-quantity">
+							<option value="">Quantity</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</li>
+				</ul>
+				<div class="ss-price"><span>$34.00</span> $22.00</div>
+				<a href="#" class="btn2 btn-center">Add to Bag</a>
+				<p>Style Deals - Usually seen as a street-wear classic, this bomber jacket takes it uptown with its quilted pattern and faux leather fabrication. Keeping with the casual elements, like the ribbed trim and zip-front, making for an effortless layer over virtually any ensemble.</p>
+				<div class="ss-favorites">
+					<a href="#" target="_blank">Add to Wish list</a>
+				</div>
+				<div class="clearfix"></div>
+				<div class="space40"></div>
+				<div class="addthis_native_toolbox"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vendor/fancyselect/fancySelect.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/vendor/isotope/jquery.isotope.min.js"></script>
+<script src="js/vendor/owl-carousel/owl.carousel.js"></script>
+<script src="js/vendor/rsplugin/rs-plugin/js/jquery.themepunch.tools.min.js"></script>   
+<script src="js/vendor/rsplugin/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script src="js/vendor/remodal/jquery.remodal.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Addthis Script -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-54681352287788c3" async="async"></script>	
+
+</body>
+</html>

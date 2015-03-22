@@ -28,6 +28,7 @@ var DressAPI = function () {
  * @param size, length, shape, color, description, email, name, phone, dorm
  */
 DressAPI.prototype.upload = function (args, ret) {
+	if (!args.email) args.email = args.cookieEmail;
 	User.getOrCreate(args.email, function (err, user) {
 		if (err) return ret(err);
 
@@ -62,6 +63,20 @@ DressAPI.prototype.upload = function (args, ret) {
 	})
 }
 
+DressAPI.prototype.delete = function (args, ret) {
+	Dress.findById(args.dressId, function(err, dress) {
+		if (err) return ret(err);
+
+		console.log(args)
+
+		if (!dress) return ret(null, true);
+
+
+		dress.remove(ret);
+	})
+
+}
+
 /**
  * filter dresses
  * @param blaaahhh
@@ -71,6 +86,7 @@ DressAPI.prototype.filter = function (args, ret) {
 	if (args.size) filterObj ['size'] = args.size;
 	if (args.color) filterObj ['color'] = args.color;
 	if (args.length) filterObj ['length'] = args.length;
+	if (args.email) filterObj ['email'] = args.email;
 
 	Dress.filter(filterObj, args.limit, args.skip, { created: -1 }, function (err, dresses) {
 		if (err) ret(err);

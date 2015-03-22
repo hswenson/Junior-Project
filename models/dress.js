@@ -77,8 +77,29 @@ dressSchema.statics.make = function (size, color, length, description, userId, b
  */
 dressSchema.statics.filter = function(filterObj, limit, skip, sort, callback) {
 	var dress;
+	var me = this;
+	var User = mongoose.jp.model('User');
 
-	this.find(filterObj).limit(limit).skip(skip).sort(sort).exec(callback);
+	async.series([
+		// Get the user
+		function (cb) {
+			if (!filterObj.email) return cb(null);
+
+			User.getOrCreate(filterObj.email, function (err, u) {
+				if (err) return cb(err);
+				else if (!u) return cb(new Error('User not found'));
+
+				delete filterObj.email;
+				filterObj['userId'] = u._id;
+				return cb(null);
+			})
+		},
+
+		// Filter
+		function (cb) {
+			me.find(filterObj).limit(limit).skip(skip).sort(sort).exec(callback);
+		}
+	], callback)
 }
 
 /******************************************************

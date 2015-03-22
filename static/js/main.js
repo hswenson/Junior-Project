@@ -1,5 +1,10 @@
 /* LOOK HERE : use filters and page limits and skips */
 
+ // Fire to backend
+var getDressUrl = './api/dress/filter';
+var getUserUrl= './api/user/get';
+var postUploadUrl = './api/dress/upload';
+var postDeleteUrl = './api/dress/delete';
 
 function createCookie(name, value, days) {
     var expires;
@@ -34,6 +39,27 @@ function logOut () {
     location.reload(true)
 }
 
+function deleteImage (imageId) {
+    var r = confirm("Are you sure you want to delete this post?")
+console.log({dressId: imageId});
+    if (r == true) {
+         $.ajax({
+            url: postDeleteUrl,  //Server script to process data
+            type: 'POST',
+            data: {dressId: imageId},
+            dataType: 'json',
+            success: function() {
+                alert('Delete successful!');
+                location.reload(true);
+            },
+            error: function () {
+                alert('Delete unsuccessful. Please try again.')
+            }
+        });
+    } 
+}
+
+
 $(document).ready(function() {
 
     var urlVarls = getUrlVars();
@@ -45,6 +71,7 @@ $(document).ready(function() {
     var __data = {
         imageGrid: [],
         userInfo: {},
+        currentEmail: readCookie("isPrincetonAuthorized"),
         currentLimit: 24,
         currentSkip: skip
     }
@@ -80,18 +107,22 @@ $(document).ready(function() {
         $button.parent().find("input").val(newVal);
     });
 
-    // Fire to backend
-    var getDressUrl = './api/dress/filter';
-    var getUserUrl= './api/user/get';
-    var postUploadUrl = './api/dress/upload';
-
     function getFilterOptions () {
         return {
             size: $('#si-size').val(),
             length: $('#si-length').val(),
             color: $('#si-color').val(),
             limit: __data.currentLimit,
-            skip: __data.currentSkip
+            skip: __data.currentSkip,
+            email: getEmailForProfile()
+        }
+    }
+
+    function getEmailForProfile() {
+        if (window.location.pathname == "/profile.html") {
+            return __data.currentEmail
+        } else {
+            return ""
         }
     }
 
@@ -141,6 +172,7 @@ $(document).ready(function() {
                 __data.userInfo = res.responseJSON || {};
 
                 $('#dressUploadForm').append(uploadFormGenerator(res.responseJSON));
+                $('#profileBodyHeader').prepend('<h4 class=product-name>Hi ' + (__data.userInfo.name || __data.currentEmail) + '! Welcome to your closet.</h4>')
 
                 $('#upload-button').click(function(){
                     var formData = new FormData($('#upload-form')[0]);
@@ -223,8 +255,7 @@ $(document).ready(function() {
     function imageHtmlFactory (i) {
 
         var imagesrc = "data:" + i.contenttype + ";base64," + i.imagedata;
-
-        return '<li>' +
+        var imageString = '<li>' +
             '<div class="product-image">' + 
                 '<div class="f1_container" style="height:250px;width:190px">' + 
                 '<div class="f1_card" >' +
@@ -244,10 +275,17 @@ $(document).ready(function() {
                 '<span>' + i.user.name + '<br>' +
                 i.user.email + '<br>' +
                 '<em>Phone:</em> ' + i.user.phone + '<br>' +
-                '<em>Dorm:</em> ' + i.user.dorm  +
-                '<em> </em> ' +'</span>'
-            '</div>' +
+                '<em>Dorm:</em> ' + i.user.dorm  + '</span>';
+        
+
+        if (getEmailForProfile()) {
+            imageString+= '<h4 class=product-name><a onclick="deleteImage(\'' + i._id + '\')" href="#">DELETE POST</a></h4>'
+        }
+
+        imageString+= '</div>' +
         '</li>';
+
+        return imageString
     }
 
     function uploadSuccess (res) {

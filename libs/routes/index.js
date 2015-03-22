@@ -68,6 +68,13 @@ Routes.prototype.initRoutes = function () {
 		skipAuth: true
 	})
 
+	this.registerRoute({
+		fn: Api.dress.delete,
+		path: '/dress/delete',
+		methods: [ 'POST' ],
+		skipAuth: true
+	})
+
 	// Redirect to docs
 	this.registerRoute({
 		fn: Api.user.get,
@@ -185,7 +192,7 @@ Routes.prototype._queryConverter = function (req) {
 	args["contentType"] = req.get('content-type')
 
 	if (req.cookies.isPrincetonAuthorized) {
-		args['email'] = req.cookies.isPrincetonAuthorized;
+		args['cookieEmail'] = req.cookies.isPrincetonAuthorized;
  	}
 	return args;
 }

@@ -28,7 +28,7 @@ var UserAPI = function () {
  * @param size, length, shape, color, description, email, name, phone, dorm
  */
 UserAPI.prototype.get = function (args, ret) {
-	User.getOrCreate(args.email, function (err, user) {
+	User.getOrCreate(args.cookieEmail, function (err, user) {
 		if (err) return ret(err);
 
 		return ret(null, user);
