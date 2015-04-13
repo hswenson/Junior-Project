@@ -1,9 +1,5 @@
 /**
- * index.js
- *
- * Top level api
- *
- *
+ * index.js: Top level api
  */
 
 /**
