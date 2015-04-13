@@ -67,7 +67,7 @@ App.startServers = function (config) {
 		    me.use(function (req, res, next) {
 		    	var validateUrl;
 		    	var url = "https://fed.princeton.edu/cas/login?service=";
-		    	var serviceUrl = 'princeton-rouge.com';
+		    	var serviceUrl = 'http://powerful-hollows-5357.herokuapp.com';
 		    	url += serviceUrl;
 		    	
 		    	if (req.cookies.isPrincetonAuthorized) {
