@@ -269,12 +269,12 @@ $(document).ready(function() {
                 '</div>' +
                 '</div>' +
             '</div>' +
-            '<div class="product-info" >' +
-                '<h4 class="product-name"><a >' + i.brand + ', ' + i.size + '</a></h4>' +
+            '<div class="product-info" >' + '<div class="centre">' +
+                '<h4 class="product-name"><a>' + i.brand + ', ' + i.size + '</a></h4>' +
                 '<span>' + i.user.name + '<br>' +
                 i.user.email + '<br>' +
                 '<em><b>Phone:</b></em> ' + i.user.phone + '<br>' +
-                '<em><b>Dorm:</b></em> ' + i.user.dorm  + '</span>';
+                '<em><b>Dorm:</b></em> ' + i.user.dorm  + '</span>' ;
         
 
         if (getEmailForProfile()) {
