@@ -268,7 +268,6 @@ $(document).ready(function() {
                     '</div>' +
                 '</div>' +
                 '</div>' +
-                '<em class="quick-view" data-remodal-target="modal">Quick View</em>' +
             '</div>' +
             '<div class="product-info" >' +
                 '<h4 class="product-name"><a >' + i.brand + ', ' + i.size + '</a></h4>' +
