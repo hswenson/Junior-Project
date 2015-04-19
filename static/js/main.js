@@ -273,8 +273,8 @@ $(document).ready(function() {
                 '<h4 class="product-name"><a >' + i.brand + ', ' + i.size + '</a></h4>' +
                 '<span>' + i.user.name + '<br>' +
                 i.user.email + '<br>' +
-                '<em>Phone:</em> ' + i.user.phone + '<br>' +
-                '<em>Dorm:</em> ' + i.user.dorm  + '</span>';
+                '<em><b>Phone:</b></em> ' + i.user.phone + '<br>' +
+                '<em><b>Dorm:</b></em> ' + i.user.dorm  + '</span>';
         
 
         if (getEmailForProfile()) {
